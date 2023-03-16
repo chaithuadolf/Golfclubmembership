@@ -1,0 +1,165 @@
+﻿@page
+@using Microsoft.AspNetCore.Identity;
+@using Golfclubmembership.Models;
+@model Golfclubmembership.Pages.ShoppingCartModel
+@{
+}
+
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+<style>
+    .clubCardsList{
+
+        width:70%;
+        height:100%;
+        display:flex;
+    }
+
+    .checkout{
+        width: 50%;
+        height: 100%;
+        background-color:whitesmoke;
+    }
+
+        .checkout p,h6 {
+            margin-top:3%;
+            margin-left:3%;
+        }
+
+        .checkout textarea{
+            margin-left: 15%;
+            overflow:hidden;        
+        }
+
+        .checkout input{
+            margin-left:30%;
+        }
+
+    .section{
+        width:100%
+    }
+
+    .section1{
+        width:60%;
+        height:40%;
+        display:flex;
+    }
+
+    .section11{
+        width:40%;
+        
+    }
+
+    .section12{
+        width:60%;
+        padding-left:2%;
+    }
+
+        .section11 img{
+            height:70%;
+            width:100%;
+        }
+
+    .section2{
+        width: 20%;
+        height: 40%;
+
+    }
+
+    .section3{
+        width: 20%;
+        height: 30%;
+    }
+
+    .button {
+        background-color: deeppink;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+</style>
+<body>
+    <h3>Shopping ClubCard Cart</h3>
+    <section>
+        <section class="clubCardsList">
+      
+            <section class="section1">
+                <p>Item</p>
+            </section>
+
+            <section class="section2">
+                <p>Quantity</p>
+            </section>
+
+            <section class="section3">
+                <p>Price</p>
+            </section>
+        </section>
+        <hr />
+        <form method="post">
+            @if (Model.cartClubCards != null && Model.cartClubCards.Count != 0)
+            {
+
+
+
+                @foreach (var cartClub in Model.cartClubCards)
+                {
+                <section class="clubCardsList">
+                    <section class="section1">
+                        <section class="section11">
+                                <img src="./images/@cartClub.ClubCards.Image">
+                        </section>
+                        <section class="section12">
+                                <h6>@cartClub.ClubCards.Title</h6>
+                                <p>STYLE# @cartClub.ClubCards.Id</p>
+                                <p>ITEM PRICE: @cartClub.ClubCards.Price</p>
+                        </section>
+                    </section>
+                    <section class="section2">
+                            <p>Quantity: @cartClub.Quantity</p>
+                            <input type="submit" value="-" asp-route-method="decrease" asp-route-id="@cartClub.ClubCards.Id">
+                            <input type="submit" value="+" asp-route-method="increase" asp-route-id="@cartClub.ClubCards.Id">
+                            <input type="submit" value="Delete" asp-route-method="delete" asp-route-id="@cartClub.ClubCards.Id">
+                    </section>
+                    <section class="section3">
+                            <p> GBP @cartClub.TotalClubCardPrice</p>
+
+                    </section>
+
+                </section>
+                }
+               
+                <hr />
+           <section style="margin-left:35%;">
+          
+            <section class="checkout">
+                <h6>ORDER SUMMARY</h6>
+                <p>Sub Total: @Model.FinalCartPrice</p>
+                <p>EST TOTAL: @Model.FinalCartPrice</p>
+
+                <p>Delivery Address:</p>
+                <textarea rows="5" cols="30" asp-for="@Model.DeliveryAddress"></textarea>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <input type="submit" class="button" value="Place Order" asp-route-method="placeorder">
+                        }
+                        else
+                        {
+                            <p style="color:red">Please login to checkout</p>
+                        }
+                    </section>
+            </section>
+            
+           
+        }
+        else
+        {
+            <h2 style="text-align:center;color:gray">Your cart is empty!</h2>
+        }
+        </form>
+    </section>
+</body>

@@ -1,0 +1,118 @@
+﻿@page
+@model Golfclubmembership.Pages.ViewClubCardListModel
+@{
+    ViewData["Title"] = "GolfClubCard";
+}
+<style>
+    .clubCardsDisplay {
+        width: 80%;
+        height: 100%;
+        /*justify-content: space-around;*/
+        display: flex;
+        flex-wrap: wrap;
+        /*background-color: #F7F9F0;*/
+    }
+
+    .clubCard {
+        min-height: 40%;
+        min-width: 22%;
+        max-height: 40%;
+        max-width: 22%;
+        margin-top: 2%;
+        margin-left: 2%;
+        margin-right: 2%;
+        margin-bottom: 2%;
+    }
+
+        .clubCard img {
+            height: 70%;
+            width: 100%;
+        }
+
+        .clubCard p {
+            font-family: Calibri;
+            color: gray;
+            margin-top: 0.5%;
+        }
+
+        .clubCard h6 {
+            font-weight: bold;
+        }
+
+    .sideDisplay {
+        width: 20%;
+        background-color: #F4F2F2;
+        height: 100%;
+    }
+</style>
+<body>
+    <section style="text-align:center">
+        <form method="post">
+            <input type="text" placeholder="Search clubcard" asp-for="@Model.Input" />
+            <input type="submit" ></input>
+        </form>
+    </section>
+    <section style="display:flex">
+        <section class="sideDisplay">
+            <p>FILTERS</p>
+            <p style="text-decoration:underline;color:black;">Colors</p>
+            <table>
+                <tr>
+                    <td>
+                        <input type="checkbox" value="White" />&nbsp;<label>White</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" value="Pink" />&nbsp;<label>Pink</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" value="Offwhite" />&nbsp;<label>Offwhite</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" value="Blue" />&nbsp;<label>Blue</label>
+                    </td>
+                </tr>
+            </table>
+            <hr />
+            <p style="text-decoration:underline;color:black;">Style</p>
+            <table>
+                <tr>
+                    <td>
+                        <input type="checkbox" value="Premium" />&nbsp;<label>Premium</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" value="Golden" />&nbsp;<label>Golden</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" value="Silver" />&nbsp;<label>Silver</label>
+                    </td>
+                </tr>
+
+            </table>
+        </section>
+        <section class="clubCardsDisplay">
+            @foreach (var clubCard in Model.ClubCards)
+            {
+
+                <section class="clubCard">
+                    <a asp-page="ViewClubCards" asp-route-id="@clubCard.Id">
+                        <img src="./images/@clubCard.Image">
+                    </a>
+                    <h6>@clubCard.Title</h6>
+                    <p>GBP @clubCard.Price</p>
+
+                </section>
+
+            }
+        </section>
+    </section>
+</body>

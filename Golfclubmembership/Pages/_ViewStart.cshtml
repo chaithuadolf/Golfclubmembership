@@ -1,0 +1,11 @@
+﻿@{
+    //if (this.User.IsInRole("customer") || !this.User.Identity.IsAuthenticated)
+    if (this.User.IsInRole("customer"))
+    {
+        Layout = "_Layout";
+    }
+    else
+    {
+        Layout = "_Layout2";
+    }
+}

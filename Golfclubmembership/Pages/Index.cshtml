@@ -1,0 +1,168 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<style>
+    .banner img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .banner {
+        display: none;
+    }
+
+    .top {
+        background-color: black;
+        color: white;
+        width: 100%;
+        margin-bottom: 1%;
+        text-align: center;
+    }
+
+        .top p {
+            font-size: 24px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+    .middle {
+        background-color: #F7F9F0;
+        width: 100%;
+        max-height: 20%;
+        display: flex;
+        overflow: hidden;
+    }
+
+    .left {
+        margin-top: 5%;
+        margin-bottom: 3%;
+        margin-left: 4%;
+        margin-right: 3%;
+        height: 30%;
+        width: 45%;
+    }
+
+    .right {
+        margin-bottom: 10%;
+        height: 30%;
+        width: 50%;
+        text-align: center;
+        max-height: fit-content;
+    }
+
+    .topRight {
+        margin-top: 30%;
+        width: 85%;
+        height: 30%;
+        margin-right: 3%;
+    }
+
+    .bottomRight {
+        background-color: #C12B0D;
+        color: white;
+        text-align: center;
+        font-family: 'Curlz MT';
+        font-size: 20px;
+        width: 75%;
+        height: fit-content;
+        margin-top: 5%;
+        margin-left: 10%;
+    }
+
+    .bottom {
+        background-color: #F9EEE9;
+        height: 35%;
+        width: 100%;
+        display: flex;
+        padding-left: 8%;
+    }
+
+        .bottom img {
+            height: 25%;
+            width: 20%;
+            margin-top: 5%;
+            margin-bottom: 5%;
+            margin-left: 1%;
+            margin-right: 1%;
+        }
+
+        .bottom > * {
+            flex: 1 1 1 1;
+        }
+
+    .button {
+        background-color: black;
+        border: solid;
+        border-radius: 3px;
+        /*padding: 15px 32px;*/
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        /* width:200px;*/
+        /*height:45px;*/
+
+        border-width: thin;
+        font-size: small;
+        height: 100%;
+        color: white;
+    }
+
+</style>
+<body>
+    <section class="top">
+        <p>SHOP YOUR GOLF CLUBCARD NOW AND GET DISCOUNT</p>
+    </section>
+    <section class="slide-container">
+        <section class="banner">
+            <img src="./images/image2.jpg" />
+        </section>
+        <section class="banner">
+            <img src="./images/image3.jpg" />
+        </section>
+        <section class="banner">
+            <img src="./images/image4.jpg" />
+        </section>
+    </section>
+
+    <section class="middle">
+        <img src="./images/image1.jpg" class="left" />
+        <section class="right">
+            <img src="./images/image3.jpg" class="topRight" />
+            <section class="bottomRight">
+
+                @*<p>LAways inspired with Taylor</p>*@
+                @* <p>Golf is cool and moreover a classy game which suits to individual who fits up on only confidence</p>*@
+            </section>
+        </section>
+    </section>
+    <section class="bottom">
+        <img src="./images/image6.jpg" />
+        <img src="./images/image7.jpg" />
+        <img src="./images/image8.jpg" />
+        <img src="./images/image9.jpg" />
+        <br />
+    </section>
+    <section style="text-align:center;">
+        <form method="post">
+            <input type="submit" value="View all club cards" class="button" />
+        </form>
+    </section>
+</body>
+<script>
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("banner");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
+    }
+</script>
